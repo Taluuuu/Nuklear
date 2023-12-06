@@ -311,7 +311,7 @@ nk_glfw3_render(struct nk_glfw* glfw, enum nk_anti_aliasing AA, int max_vertex_b
 NK_API void
 nk_glfw3_char_callback(GLFWwindow *win, unsigned int codepoint)
 {
-    struct nk_glfw* glfw = glfwGetWindowUserPointer(win);
+    struct nk_glfw* glfw = (nk_glfw*)glfwGetWindowUserPointer(win);
     if (glfw->text_len < NK_GLFW_TEXT_MAX)
         glfw->text[glfw->text_len++] = codepoint;
 }
@@ -319,7 +319,7 @@ nk_glfw3_char_callback(GLFWwindow *win, unsigned int codepoint)
 NK_API void
 nk_gflw3_scroll_callback(GLFWwindow *win, double xoff, double yoff)
 {
-    struct nk_glfw* glfw = glfwGetWindowUserPointer(win);
+    struct nk_glfw* glfw = (nk_glfw*)glfwGetWindowUserPointer(win);
     (void)xoff;
     glfw->scroll.x += (float)xoff;
     glfw->scroll.y += (float)yoff;
@@ -328,7 +328,7 @@ nk_gflw3_scroll_callback(GLFWwindow *win, double xoff, double yoff)
 NK_API void
 nk_glfw3_mouse_button_callback(GLFWwindow* win, int button, int action, int mods)
 {
-    struct nk_glfw* glfw = glfwGetWindowUserPointer(win);
+    struct nk_glfw* glfw = (nk_glfw*)glfwGetWindowUserPointer(win);
     double x, y;
     NK_UNUSED(mods);
     if (button != GLFW_MOUSE_BUTTON_LEFT) return;
